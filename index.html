@@ -143,6 +143,56 @@
     </aside>
   </main>
 
+  <!-- Admin Panel Overlay (access via /#admin) -->
+  <div id="admin-overlay" class="admin-overlay" aria-hidden="true">
+
+    <!-- Password Gate -->
+    <div id="admin-gate" class="admin-gate-screen">
+      <div class="admin-gate-inner">
+        <p class="admin-gate-brand">Trunk Sale Tour '26 &mdash; Admin</p>
+        <h2 class="admin-gate-title">Tweet Manager</h2>
+        <p class="admin-gate-sub">Enter admin password to manage location tweets</p>
+        <input type="password" id="admin-password" class="admin-gate-input" placeholder="Password" autocomplete="current-password">
+        <button id="admin-gate-submit" class="admin-gate-btn">Enter Admin</button>
+        <p class="admin-gate-error" id="admin-gate-error">Incorrect password. Try again.</p>
+      </div>
+    </div>
+
+    <!-- Admin App (shown after auth) -->
+    <div id="admin-app" class="admin-app" style="display:none">
+      <header class="admin-header">
+        <div class="admin-header-brand">
+          <div class="admin-header-dot"></div>
+          <span class="admin-header-title">Tweet Manager <span>/ Trunk Sale Tour '26</span></span>
+        </div>
+        <div class="admin-header-actions">
+          <span class="admin-save-toast" id="admin-save-toast">Saved!</span>
+          <button class="admin-btn-back" id="admin-back-btn" aria-label="Back to map">
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <polyline points="9 1 3 7 9 13"/>
+            </svg>
+            Back to Map
+          </button>
+          <button class="admin-btn-save" id="admin-save-btn">Save All</button>
+        </div>
+      </header>
+
+      <div class="admin-body">
+        <div class="admin-intro">
+          <h2>Location Tweets</h2>
+          <p>Paste tweet URLs (from X/Twitter) for each stop. They appear under the city description on the map. Up to 3 tweets per stop — tweets with images work best.</p>
+        </div>
+        <div id="admin-stops-list"></div>
+      </div>
+
+      <footer class="admin-footer">
+        <span class="admin-footer-note">Data saved to browser localStorage &mdash; persists until cleared</span>
+        <button class="admin-btn-save" id="admin-save-btn-footer">Save All</button>
+      </footer>
+    </div>
+
+  </div>
+
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   <script src="app.js"></script>

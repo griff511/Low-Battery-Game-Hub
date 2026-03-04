@@ -554,6 +554,381 @@ ul { list-style: none; }
   letter-spacing: 0.05em;
 }
 
+/* ===== ADMIN OVERLAY ===== */
+.admin-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+
+.admin-overlay.is-active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Gate */
+.admin-gate-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 24px;
+}
+
+.admin-gate-inner {
+  width: 100%;
+  max-width: 360px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 36px 32px;
+  text-align: center;
+}
+
+.admin-gate-brand {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.admin-gate-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.admin-gate-sub {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 28px;
+}
+
+.admin-gate-input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.admin-gate-input:focus { border-color: var(--gold-border); }
+
+.admin-gate-btn {
+  width: 100%;
+  background: var(--gold);
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.admin-gate-btn:hover { opacity: 0.88; }
+
+.admin-gate-error {
+  font-size: 12px;
+  color: #e74c3c;
+  margin-top: 10px;
+  display: none;
+}
+
+/* Admin App Shell */
+.admin-app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.admin-header {
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.admin-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-header-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.admin-header-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.admin-header-title span {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.admin-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-save-toast {
+  font-size: 12px;
+  font-weight: 600;
+  color: #2ecc71;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.admin-save-toast.show { opacity: 1; }
+
+.admin-btn-back {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--text-dim);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.admin-btn-back:hover {
+  border-color: rgba(255,255,255,0.2);
+  color: var(--text);
+}
+
+.admin-btn-save {
+  background: var(--gold);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #000;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: opacity 0.2s;
+}
+
+.admin-btn-save:hover { opacity: 0.88; }
+
+.admin-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 40px 24px 100px;
+}
+
+.admin-intro {
+  max-width: 760px;
+  margin: 0 auto 36px;
+}
+
+.admin-intro h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.admin-intro p {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* Stop Cards */
+.admin-stop-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 0 auto 12px;
+  max-width: 760px;
+}
+
+.admin-stop-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.admin-stop-num {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.admin-stop-city {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.admin-stop-state {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.admin-btn-clear {
+  background: transparent;
+  border: 1px solid rgba(192,57,43,0.3);
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #e07068;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.admin-btn-clear:hover { background: rgba(192,57,43,0.12); }
+
+.admin-search-hint {
+  background: var(--bg-panel-2);
+  border-radius: 5px;
+  padding: 8px 12px;
+  margin-bottom: 14px;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.admin-search-hint strong { color: var(--text-muted); font-weight: 600; }
+
+.admin-search-hint code {
+  color: var(--gold);
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+}
+
+.admin-tweet-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-tweet-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-tweet-url {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 9px 12px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.admin-tweet-url:focus { border-color: var(--gold-border); }
+.admin-tweet-url::placeholder { color: var(--text-muted); }
+
+.admin-btn-remove {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  font-size: 18px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.admin-btn-remove:hover { color: #e07068; }
+
+.admin-btn-add {
+  margin-top: 8px;
+  background: transparent;
+  border: 1px dashed rgba(255,255,255,0.12);
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  width: 100%;
+}
+
+.admin-btn-add:hover {
+  border-color: var(--gold-border);
+  color: var(--gold);
+}
+
+.admin-btn-add:disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.admin-footer {
+  border-top: 1px solid var(--border);
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  background: var(--bg-panel);
+}
+
+.admin-footer-note {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
 /* ===== TWEET EMBEDS ===== */
 .tweets-section {
   border-top: 1px solid var(--border);
