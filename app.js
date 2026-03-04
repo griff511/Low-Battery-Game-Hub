@@ -16,20 +16,6 @@ const stops = [
   },
   {
     id: 2,
-    city: 'Chapel Hill',
-    state: 'North Carolina',
-    date: 'February 7–8, 2026',
-    location: 'Franklin Street & UNC campus',
-    lat: 35.9132,
-    lng: -79.0558,
-    story: 'Franklin Street has watched a lot of careers begin. Cole walked the strip that helped shape him, letting students and locals who had no idea they\'d run into a living legend stumble across The Fall-Off in real time. No stage — just the sidewalk.',
-    flavor: [
-      { name: 'He\'s A Keeper', detail: 'Coffee and community on Franklin St. The kind of corner shop that feels like it belongs to everybody.' },
-      { name: 'Cat\'s Cradle', detail: 'In nearby Carrboro — one of the best small music venues in the South, where legends quietly begin.' }
-    ]
-  },
-  {
-    id: 3,
     city: 'Greensboro',
     state: 'North Carolina',
     date: 'February 8, 2026',
@@ -43,7 +29,7 @@ const stops = [
     ]
   },
   {
-    id: 4,
+    id: 3,
     city: 'Charlotte',
     state: 'North Carolina',
     date: 'February 8–9, 2026',
@@ -57,21 +43,7 @@ const stops = [
     ]
   },
   {
-    id: 5,
-    city: 'Greenville',
-    state: 'South Carolina',
-    date: 'February 9–10, 2026',
-    location: 'Downtown Greenville',
-    lat: 34.8526,
-    lng: -82.3940,
-    story: 'Not every stop was a major market. Greenville proved Cole was serious about reaching everyone — not just cities with arenas. The crowd that assembled was unexpectedly massive, the kind that forms when word spreads faster than expected.',
-    flavor: [
-      { name: 'Falls Park on the Reedy', detail: 'A stunning waterfall in the heart of downtown — one of the most underrated urban parks in the Southeast.' },
-      { name: 'Swamp Rabbit Trail', detail: 'Twenty-two miles of paved trail along the Reedy River. The city\'s best-kept secret, until it wasn\'t.' }
-    ]
-  },
-  {
-    id: 6,
+    id: 4,
     city: 'Atlanta',
     state: 'Georgia',
     date: 'February 10–11, 2026',
@@ -85,21 +57,35 @@ const stops = [
     ]
   },
   {
-    id: 7,
+    id: 5,
     city: 'Hampton',
     state: 'Virginia',
     date: 'February 12, 2026',
     location: 'Hampton University',
     lat: 37.0269,
     lng: -76.3428,
-    story: 'Hampton University — one of the oldest HBCUs in the country — hosted Cole\'s second campus stop. Students lined up to buy a physical album in an era when most people stream. The gesture hit different when the artist hands it to you himself.',
+    story: 'Hampton University — one of the oldest HBCUs in the country — hosted Cole\'s Virginia campus stop. Students lined up to buy a physical album in an era when most people stream. The gesture hit different when the artist hands it to you himself.',
     flavor: [
       { name: 'Virginia Air & Space Center', detail: 'On Settler\'s Landing Road — one of the most underrated science museums on the East Coast, overlooking Hampton Roads.' },
       { name: 'Buckroe Beach', detail: 'Ten minutes from campus. A local beach that feels nothing like a tourist destination, in the best possible way.' }
     ]
   },
   {
-    id: 8,
+    id: 6,
+    city: 'Norfolk',
+    state: 'Virginia',
+    date: 'February 12–13, 2026',
+    location: 'Various spots',
+    lat: 36.8508,
+    lng: -76.2859,
+    story: 'The 757 has given the world Pharrell, Timbaland, and Missy Elliott. Norfolk knows what music looks like when it\'s built from scratch with no cosign. Cole\'s Trunk Sale here landed in a city that\'s been doing it quietly for decades and doesn\'t need the validation.',
+    flavor: [
+      { name: 'Granby Street', detail: 'Norfolk\'s main cultural artery — live music venues, restaurants, and the energy of a city that moves at its own pace.' },
+      { name: 'Nauticus', detail: 'The naval museum on the waterfront, home to the battleship Wisconsin. One of the most impressive free attractions on the East Coast.' }
+    ]
+  },
+  {
+    id: 7,
     city: 'Washington',
     state: 'D.C.',
     date: 'February 13, 2026',
@@ -113,42 +99,56 @@ const stops = [
     ]
   },
   {
-    id: 9,
-    city: 'Silver Spring',
+    id: 8,
+    city: 'Baltimore',
     state: 'Maryland',
     date: 'February 13–14, 2026',
-    location: 'Downtown Silver Spring',
-    lat: 38.9907,
-    lng: -77.0261,
-    story: 'Just outside D.C., Silver Spring\'s diverse community showed up the way the DMV always does — loud, proud, and deep. Veterans Plaza filled with people who\'d heard about the Trunk Sale and made the trip. The ripple from Howard hadn\'t stopped yet.',
+    location: 'Various spots',
+    lat: 39.2904,
+    lng: -76.6122,
+    story: 'Baltimore\'s hip-hop scene has always punched above its weight. The city\'s hunger for real music showed up for Cole in a way that proved the Trunk Sale wasn\'t just an East Coast coastal thing — it was Mid-Atlantic, all the way through. The line stretched before Cole had even opened the trunk.',
     flavor: [
-      { name: 'Busboys and Poets', detail: 'On Colesville Road — the iconic bookstore-restaurant-bar that\'s become a DMV cultural institution. More than a meal.' },
-      { name: 'AFI Silver Theatre', detail: 'A restored art deco movie palace showing films you won\'t find at the multiplex. The right place to see anything.' }
+      { name: 'Lexington Market', detail: 'One of America\'s oldest continuously operating public markets — open since 1782. Street food, community, and no pretense.' },
+      { name: 'The Ottobar', detail: 'Charles Street indie venue that\'s hosted every genre. The kind of room where you can tell who actually loves music.' }
+    ]
+  },
+  {
+    id: 9,
+    city: 'Philadelphia',
+    state: 'Pennsylvania',
+    date: 'February 14–15, 2026',
+    location: 'Various spots',
+    lat: 39.9526,
+    lng: -75.1652,
+    story: 'Philly\'s rap fans are notoriously discerning — the city that gave us Meek Mill, Freeway, and The Roots doesn\'t hand out respect. Cole\'s Trunk Sale here earned it. The Fall-Off moved in Philadelphia before any streaming numbers could say anything.',
+    flavor: [
+      { name: 'Reading Terminal Market', detail: 'Open since 1892 and still the city\'s best culinary institution — Amish produce, DiNic\'s roast pork, and Fisher\'s pretzels.' },
+      { name: 'South Street', detail: 'The corridor where Philly\'s counterculture has always lived — record shops, murals, Jim\'s Steaks, and forty years of attitude.' }
     ]
   },
   {
     id: 10,
-    city: 'Queens',
+    city: 'New York City',
     state: 'New York',
-    date: 'February 14, 2026',
-    location: 'Local deli, Jamaica area',
-    lat: 40.7068,
-    lng: -73.7996,
-    story: 'Valentine\'s Day. Cole pulled up to a Queens deli — no announcement, no security cordon — and started greeting people like he had nowhere else to be. Clips went viral within the hour. The deli had never been so famous, and Cole looked like he was having the time of his life.',
+    date: 'February 14–15, 2026',
+    location: 'Various spots, Manhattan',
+    lat: 40.7128,
+    lng: -74.0060,
+    story: 'The proving ground. Cole pulled up to the city that never made it easy for anyone and sold albums to New Yorkers who respect craft above all else. The streets didn\'t need convincing — they already knew.',
     flavor: [
-      { name: 'Jamaica Avenue', detail: 'One of NYC\'s most vibrant commercial corridors — sneaker shops, food spots, barbershops, and the heartbeat of the borough.' },
-      { name: 'Queens Night Market', detail: 'Flushing Meadows-Corona Park (seasonal) — 100+ vendors, 50+ countries, zero pretension. Peak Queens.' }
+      { name: 'Fat Cat', detail: 'West Village jazz club and game room. Live music every night, no dress code — the kind of NYC institution that still exists if you know where to look.' },
+      { name: 'Essex Market', detail: 'Lower East Side market reborn on Delancey. Vendor stalls, international food, and the city\'s most genuine cross-section of people.' }
     ]
   },
   {
     id: 11,
-    city: 'Queens',
-    state: 'New York — St. John\'s',
+    city: 'St. John\'s University',
+    state: 'Queens, New York',
     date: 'February 14, 2026',
     location: 'St. John\'s University, Jamaica, Queens',
     lat: 40.7214,
     lng: -73.7946,
-    story: 'Same day, different Queens energy. After the deli, Cole went back to his alma mater — the campus where his rap career quietly began before anyone was paying attention. Students lined up to buy the album from the man who once sat in the same seats. It closed a loop that took decades to close.',
+    story: 'Cole went back to his alma mater — the campus where his rap career quietly began before anyone was paying attention. Students lined up to buy the album from the man who once sat in the same seats. It closed a loop that took decades to close.',
     flavor: [
       { name: 'Jamaica Ave food strip', detail: 'The stretch near St. John\'s is all local — Jamaican bakeries, Chinese takeout, halal carts, and dollar pizza. The real campus cafeteria.' },
       { name: 'Queens Botanical Garden', detail: 'Five minutes from campus. Forty-nine acres of unexpected quiet in the middle of New York City.' }
@@ -156,16 +156,100 @@ const stops = [
   },
   {
     id: 12,
+    city: 'Nashville',
+    state: 'Tennessee',
+    date: 'February 2026',
+    location: 'Various spots',
+    lat: 36.1627,
+    lng: -86.7816,
+    story: 'Best known for country music, Nashville\'s Black music scene is enormous and chronically overlooked. Cole\'s stop here was a reminder that The Fall-Off belongs to every city — not just the ones with a hip-hop flag already planted.',
+    flavor: [
+      { name: 'Jefferson Street', detail: 'Nashville\'s historic Black entertainment district — the corridor that hosted Jimi Hendrix and Etta James before they were famous.' },
+      { name: 'Hattie B\'s Hot Chicken', detail: 'On Broadway and several other locations. The city\'s most exported food tradition, best experienced without air conditioning.' }
+    ]
+  },
+  {
+    id: 13,
+    city: 'Huntsville',
+    state: 'Alabama',
+    date: 'February 2026',
+    location: 'Various spots',
+    lat: 34.7304,
+    lng: -86.5861,
+    story: 'Huntsville doesn\'t get enough credit in any cultural conversation. Cole showing up here — a mid-size Alabama city better known for NASA than rap — was exactly the kind of move that separates a real tour from a promotional run. The people who showed up had been waiting for someone to see them.',
+    flavor: [
+      { name: 'US Space & Rocket Center', detail: 'One of the most impressive Saturn V rockets you\'ll ever stand next to. Huntsville built the thing that got us to the moon.' },
+      { name: 'Lowe Mill ARTS', detail: 'The largest privately owned arts facility in the US, housed in a former textile mill. More than 150 working artists under one roof.' }
+    ]
+  },
+  {
+    id: 14,
+    city: 'New Orleans',
+    state: 'Louisiana',
+    date: 'February 2026',
+    location: 'Various spots',
+    lat: 29.9511,
+    lng: -90.0715,
+    story: 'NOLA runs on music — brass bands, bounce, jazz, everything. When Cole pulled up with a hip-hop album and an open trunk, the city absorbed it into its rhythm like it had always been there. New Orleans doesn\'t resist music. It just adds to it.',
+    flavor: [
+      { name: 'Frenchmen Street', detail: 'Not Bourbon — Frenchmen is where locals actually go. Live music spilling out of every door, seven nights a week, year round.' },
+      { name: 'Dooky Chase\'s', detail: 'On Orleans Ave since 1941 — a civil rights landmark and legendary Creole kitchen. Leah Chase fed everyone from Ray Charles to Barack Obama.' }
+    ]
+  },
+  {
+    id: 15,
+    city: 'Baton Rouge',
+    state: 'Louisiana',
+    date: 'February 2026',
+    location: 'Various spots',
+    lat: 30.4515,
+    lng: -91.1871,
+    story: 'Boosie. Kevin Gates. Baton Rouge has produced some of the rawest, realest rap voices in the country. Cole\'s Trunk Sale landed in a city that knows the difference between a rapper and an artist — and has never confused the two.',
+    flavor: [
+      { name: 'Southern University', detail: 'A major HBCU right in Baton Rouge — fitting for a tour that\'s honored Black colleges at nearly every turn.' },
+      { name: 'Parrain\'s Seafood', detail: 'On O\'Neal Lane — the best crawfish étouffée in a city full of good crawfish étouffée. Non-negotiable stop.' }
+    ]
+  },
+  {
+    id: 16,
+    city: 'Houston',
+    state: 'Texas',
+    date: 'February 2026',
+    location: 'Various spots',
+    lat: 29.7604,
+    lng: -95.3698,
+    story: 'H-Town — the birthplace of chopped and screwed, a genre built on slowing music down so you could feel every layer. Cole selling physical CDs in Houston felt deeply appropriate: a format you hold, slow music you feel. The city understood the assignment.',
+    flavor: [
+      { name: 'The Breakfast Klub', detail: 'On Travis Street — Houston\'s most iconic breakfast spot. Wings & waffles, a daily pilgrimage for the city\'s artists and creative class.' },
+      { name: 'Third Ward', detail: 'The heart of Houston\'s Black cultural history. Emancipation Park, Project Row Houses, and the community that built this city\'s sound.' }
+    ]
+  },
+  {
+    id: 17,
     city: 'Phoenix',
     state: 'Arizona',
     date: 'February 23, 2026',
     location: 'Auto mechanic shop',
     lat: 33.4484,
     lng: -112.0740,
-    story: 'En route to Los Angeles, the Honda Civic finally said enough. The car broke down, Cole and his team pulled into a mechanic shop in Phoenix, and what could have been a frustrating day became one of the most iconic moments of the whole tour. Cole filmed the "Old Dog" music video at the shop, signed albums for the mechanics, and by the time the car was fixed, hundreds of fans had lined up down the street. Even breakdowns were content.',
+    story: 'En route to Los Angeles, the Honda Civic finally said enough. Cole pulled into a mechanic shop, filmed the "Old Dog" music video at the garage, signed albums for the mechanics, and by the time the car was fixed, hundreds of fans had lined up down the street. Even breakdowns were content.',
     flavor: [
       { name: 'Camelback Mountain', detail: 'Phoenix\'s iconic peak — a two-hour hike with panoramic views of the entire valley. Worth the climb, every time.' },
       { name: 'The Van Buren', detail: 'Grand Ave venue with 1,900 capacity. The right size for artists who haven\'t hit arenas yet — and for legends who want the room intimate.' }
+    ]
+  },
+  {
+    id: 18,
+    city: 'Los Angeles',
+    state: 'California',
+    date: 'Late February 2026',
+    location: 'Various spots',
+    lat: 34.0522,
+    lng: -118.2437,
+    story: 'The final destination — and the one that almost didn\'t happen after the Civic broke down in Phoenix. But Cole made it. LA\'s hip-hop royalty, from Compton to Leimert Park, welcomed The Fall-Off with the respect it had earned over three weeks and nearly 3,000 miles on the road.',
+    flavor: [
+      { name: 'Leimert Park Village', detail: 'The cultural center of Black LA — art galleries, jazz spots, and the community that\'s been holding it down since the \'90s.' },
+      { name: 'Roscoe\'s Chicken & Waffles', detail: 'On Pico Blvd and several other locations. Non-negotiable. The mandatory last meal before you leave LA.' }
     ]
   }
 ];
