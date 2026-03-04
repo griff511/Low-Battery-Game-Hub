@@ -667,10 +667,7 @@ document.addEventListener('keydown', e => {
   function buildStopCards() {
     const data = loadTweetData();
     stopsList.innerHTML = '';
-    if (!stops || !stops.length) {
-      stopsList.innerHTML = '<p style="color:red;padding:24px">DEBUG: stops array is empty or undefined</p>';
-      return;
-    }
+    if (!stops || !stops.length) return;
     stops.forEach(stop => {
       const savedUrls = (data[stop.id] || []).filter(Boolean);
       const urls = savedUrls.length > 0 ? savedUrls : [''];
@@ -696,9 +693,6 @@ document.addEventListener('keydown', e => {
       `;
       stopsList.appendChild(card);
     });
-    if (!stopsList.children.length) {
-      stopsList.innerHTML = '<p style="color:red;padding:24px">DEBUG: forEach ran but no cards were appended</p>';
-    }
     bindCardEvents();
   }
 
