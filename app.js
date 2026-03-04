@@ -506,7 +506,35 @@ document.addEventListener('keydown', e => {
 });
 
 /* ===== INITIAL LOAD ===== */
-// Auto-open first stop after a short delay so the map can settle
+// Auto-open first stop only once landing is dismissed (or if no landing present)
+let initialStopSelected = false;
 setTimeout(() => {
-  selectStop(1);
+  const l = document.getElementById('landing');
+  if (!l || l.classList.contains('is-hidden')) {
+    if (!initialStopSelected) { initialStopSelected = true; selectStop(1); }
+  }
 }, 1200);
+
+/* ===== LANDING SCREEN ===== */
+const landing = document.getElementById('landing');
+const landingEnter = document.getElementById('landing-enter');
+
+function dismissLanding() {
+  if (!landing || landing.classList.contains('is-hidden')) return;
+  landing.classList.add('is-hidden');
+  setTimeout(() => {
+    landing.style.display = 'none';
+    if (!initialStopSelected) { initialStopSelected = true; selectStop(1); }
+  }, 700);
+}
+
+landingEnter.addEventListener('click', dismissLanding);
+
+document.addEventListener('keydown', e => {
+  if (landing && !landing.classList.contains('is-hidden')) {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') {
+      e.preventDefault();
+      dismissLanding();
+    }
+  }
+});

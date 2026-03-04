@@ -11,6 +11,72 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Landing Screen -->
+  <div id="landing" role="dialog" aria-label="Enter the map" aria-modal="true">
+    <div class="landing-bg-glow"></div>
+    <div class="landing-inner">
+      <p class="landing-brand">Low Battery</p>
+      <h2 class="landing-title">J. Cole's<br>Trunk Sale Map</h2>
+      <div class="landing-scene" aria-hidden="true">
+        <div class="civic-wrap">
+          <div class="hlight-beam"></div>
+          <svg class="civic-svg" viewBox="0 0 200 72" xmlns="http://www.w3.org/2000/svg">
+            <!-- ground shadow -->
+            <ellipse cx="103" cy="70" rx="84" ry="3" fill="rgba(0,0,0,0.55)"/>
+            <!-- body -->
+            <path d="M 15,49 L 15,43 Q 18,36 24,36 L 42,36 L 59,25 L 81,19 L 130,19 L 151,21 L 168,32 L 181,36 Q 189,39 190,44 L 190,49 Z"
+                  fill="#1c1c1c" stroke="#2c2c2c" stroke-width="1.5"/>
+            <!-- windows -->
+            <path d="M 63,27 L 81,21 L 130,21 L 149,23 L 165,33 L 153,36 L 69,36 Z"
+                  fill="#0b1e30" stroke="#162c40" stroke-width="1"/>
+            <!-- B-pillar -->
+            <rect x="103" y="21" width="3" height="15" fill="#111"/>
+            <!-- headlight -->
+            <path d="M 188,38 L 194,40 L 194,46 L 188,45 Z" fill="#F5C518"/>
+            <!-- taillight -->
+            <rect x="13" y="38" width="3" height="9" rx="1" fill="#7a0000"/>
+            <!-- door crease -->
+            <path d="M 26,43 Q 103,45 183,42" stroke="#252525" stroke-width="1.5" fill="none"/>
+            <!-- front wheel outer -->
+            <circle cx="165" cy="54" r="15" fill="#111" stroke="#333" stroke-width="2"/>
+            <!-- front wheel hub + spokes -->
+            <g class="wheel-inner" style="transform-box:fill-box;transform-origin:center">
+              <circle cx="165" cy="54" r="8" fill="#1e1e1e" stroke="#2e2e2e" stroke-width="1.5"/>
+              <line x1="165" y1="46" x2="165" y2="62" stroke="#383838" stroke-width="1.5"/>
+              <line x1="157" y1="54" x2="173" y2="54" stroke="#383838" stroke-width="1.5"/>
+              <line x1="159.3" y1="48.3" x2="170.7" y2="59.7" stroke="#383838" stroke-width="1.5"/>
+              <line x1="170.7" y1="48.3" x2="159.3" y2="59.7" stroke="#383838" stroke-width="1.5"/>
+            </g>
+            <!-- rear wheel outer -->
+            <circle cx="45" cy="54" r="15" fill="#111" stroke="#333" stroke-width="2"/>
+            <!-- rear wheel hub + spokes -->
+            <g class="wheel-inner" style="transform-box:fill-box;transform-origin:center">
+              <circle cx="45" cy="54" r="8" fill="#1e1e1e" stroke="#2e2e2e" stroke-width="1.5"/>
+              <line x1="45" y1="46" x2="45" y2="62" stroke="#383838" stroke-width="1.5"/>
+              <line x1="37" y1="54" x2="53" y2="54" stroke="#383838" stroke-width="1.5"/>
+              <line x1="39.3" y1="48.3" x2="50.7" y2="59.7" stroke="#383838" stroke-width="1.5"/>
+              <line x1="50.7" y1="48.3" x2="39.3" y2="59.7" stroke="#383838" stroke-width="1.5"/>
+            </g>
+          </svg>
+        </div>
+        <div class="landing-road">
+          <div class="road-dashes"></div>
+        </div>
+      </div>
+      <div class="landing-loader">
+        <div class="loader-track"><div class="loader-fill"></div></div>
+        <p class="loader-label">Loading tour stops&hellip;</p>
+      </div>
+      <button id="landing-enter" class="landing-enter-btn">
+        ENTER MAP
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <polyline points="5 1 11 7 5 13"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
   <header id="header">
     <div class="header-inner">
       <div class="header-brand">
