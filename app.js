@@ -659,6 +659,11 @@ document.addEventListener('keydown', e => {
   }
 
   /* ---- Stop Cards ---- */
+  function loadTweetData() {
+    try { return JSON.parse(localStorage.getItem(TWEET_STORAGE_KEY) || '{}'); }
+    catch { return {}; }
+  }
+
   function buildStopCards() {
     const data = loadTweetData();
     stopsList.innerHTML = '';
