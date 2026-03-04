@@ -2,6 +2,7 @@
 const stops = [
   {
     id: 1,
+    type: 'cd-sale',
     city: 'Raleigh',
     state: 'North Carolina',
     date: 'February 7, 2026',
@@ -16,6 +17,7 @@ const stops = [
   },
   {
     id: 2,
+    type: 'full-circle',
     city: 'Greensboro',
     state: 'North Carolina',
     date: 'February 8, 2026',
@@ -30,6 +32,7 @@ const stops = [
   },
   {
     id: 3,
+    type: 'city-tour',
     city: 'Charlotte',
     state: 'North Carolina',
     date: 'February 8–9, 2026',
@@ -44,6 +47,7 @@ const stops = [
   },
   {
     id: 4,
+    type: 'party',
     city: 'Atlanta',
     state: 'Georgia',
     date: 'February 10–11, 2026',
@@ -58,6 +62,7 @@ const stops = [
   },
   {
     id: 5,
+    type: 'hbcu',
     city: 'Hampton',
     state: 'Virginia',
     date: 'February 12, 2026',
@@ -72,6 +77,7 @@ const stops = [
   },
   {
     id: 6,
+    type: 'microphone',
     city: 'Norfolk',
     state: 'Virginia',
     date: 'February 12–13, 2026',
@@ -86,6 +92,7 @@ const stops = [
   },
   {
     id: 7,
+    type: 'hbcu',
     city: 'Washington',
     state: 'D.C.',
     date: 'February 13, 2026',
@@ -100,6 +107,7 @@ const stops = [
   },
   {
     id: 8,
+    type: 'cd-sale',
     city: 'Baltimore',
     state: 'Maryland',
     date: 'February 13–14, 2026',
@@ -114,6 +122,7 @@ const stops = [
   },
   {
     id: 9,
+    type: 'cd-sale',
     city: 'Philadelphia',
     state: 'Pennsylvania',
     date: 'February 14–15, 2026',
@@ -128,6 +137,7 @@ const stops = [
   },
   {
     id: 10,
+    type: 'graduation',
     city: 'New York City',
     state: 'New York',
     date: 'February 14–15, 2026',
@@ -142,6 +152,7 @@ const stops = [
   },
   {
     id: 11,
+    type: 'graduation',
     city: 'St. John\'s University',
     state: 'Queens, New York',
     date: 'February 14, 2026',
@@ -156,6 +167,7 @@ const stops = [
   },
   {
     id: 12,
+    type: 'conversation',
     city: 'Nashville',
     state: 'Tennessee',
     date: 'February 2026',
@@ -170,6 +182,7 @@ const stops = [
   },
   {
     id: 13,
+    type: 'tiktok',
     city: 'Huntsville',
     state: 'Alabama',
     date: 'February 2026',
@@ -184,6 +197,7 @@ const stops = [
   },
   {
     id: 14,
+    type: 'party',
     city: 'New Orleans',
     state: 'Louisiana',
     date: 'February 2026',
@@ -198,6 +212,7 @@ const stops = [
   },
   {
     id: 15,
+    type: 'hbcu',
     city: 'Baton Rouge',
     state: 'Louisiana',
     date: 'February 2026',
@@ -212,6 +227,7 @@ const stops = [
   },
   {
     id: 16,
+    type: 'cd-sale',
     city: 'Houston',
     state: 'Texas',
     date: 'February 2026',
@@ -226,6 +242,7 @@ const stops = [
   },
   {
     id: 17,
+    type: 'wrench',
     city: 'Phoenix',
     state: 'Arizona',
     date: 'February 23, 2026',
@@ -240,6 +257,7 @@ const stops = [
   },
   {
     id: 18,
+    type: 'burger',
     city: 'Los Angeles',
     state: 'California',
     date: 'Late February 2026',
@@ -253,6 +271,109 @@ const stops = [
     ]
   }
 ];
+
+/* ===== STOP META ===== */
+const stopMeta = {
+  1:  { headline: 'Ground Zero',               keyMoment: 'The trunk opened before the press release could' },
+  2:  { headline: 'Full Circle',               keyMoment: '20 years after first selling CDs here as a teenager' },
+  3:  { headline: 'The Queen City Claims You', keyMoment: 'A homecoming before Cole had even parked the car' },
+  4:  { headline: 'ATL Reunion',               keyMoment: "Dreamville and Atlanta share DNA — this wasn't a visit, it was a reunion" },
+  5:  { headline: 'The Gesture',               keyMoment: 'It hit different when the artist hands it to you himself' },
+  6:  { headline: 'The Viral Freestyle',       keyMoment: "'Hey bro, you talented' — J. Cole to KELO SOUL" },
+  7:  { headline: 'The Mecca',                 keyMoment: 'The Washington Post ran a full feature — Howard made it official' },
+  8:  { headline: 'Before the Trunk Opened',   keyMoment: 'The line stretched before Cole had even unlocked the car' },
+  9:  { headline: 'Philly Respect',            keyMoment: 'The Fall-Off moved in Philadelphia before any streaming numbers could say anything' },
+  10: { headline: 'The Proving Ground',        keyMoment: 'New Yorkers who respect craft above all else — and they showed up' },
+  11: { headline: "Back to St. John's",        keyMoment: 'Returned to the campus where his rap career quietly began' },
+  12: { headline: 'The Overlooked Scene',      keyMoment: "A reminder that The Fall-Off belongs to every city — not just the ones with a hip-hop flag" },
+  13: { headline: 'Huntsville Seen',           keyMoment: 'The people who showed up had been waiting for someone to see them' },
+  14: { headline: 'NOLA Absorbs Everything',   keyMoment: "New Orleans doesn't resist music — it just adds to it" },
+  15: { headline: 'BR Knows the Difference',  keyMoment: 'A city that knows the difference between a rapper and an artist' },
+  16: { headline: 'Format Meets Format',       keyMoment: 'A format you hold, slow music you feel — Houston understood the assignment' },
+  17: { headline: 'The Civic Breaks Down',     keyMoment: 'Turned the repair shop into a music video set' },
+  18: { headline: 'Marathon Continues',        keyMoment: "Worked a shift at Nipsey's Marathon Burger" },
+};
+
+/* ===== STOP ICONS ===== */
+const STOP_ICONS = {
+  'cd-sale': `
+    <circle cx="12" cy="12" r="9"/>
+    <circle cx="12" cy="12" r="3.5"/>
+    <circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/>
+    <line x1="12" y1="8.5" x2="12" y2="3"/>`,
+
+  'college': `
+    <polygon points="12,3 22,8 12,13 2,8"/>
+    <polyline points="6,10.5 6,17 12,20 18,17 18,10.5"/>
+    <line x1="22" y1="8" x2="22" y2="14"/>`,
+
+  'full-circle': `
+    <path d="M20 12a8 8 0 1 1-8-8"/>
+    <polyline points="17,4 20,4 20,7"/>
+    <circle cx="12" cy="12" r="3"/>
+    <circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/>`,
+
+  'city-tour': `
+    <polyline points="2,21 2,10 8,10 8,21"/>
+    <polyline points="8,21 8,6 16,6 16,21"/>
+    <polyline points="16,21 16,13 22,13 22,21"/>
+    <line x1="1" y1="21" x2="23" y2="21"/>`,
+
+  'party': `
+    <circle cx="8" cy="7" r="2.5"/>
+    <path d="M4 20c0-3.3 1.8-6 4-6s4 2.7 4 6"/>
+    <circle cx="17" cy="7" r="2.5"/>
+    <path d="M13 20c0-3.3 1.8-6 4-6s4 2.7 4 6"/>
+    <path d="M12 3v2M10 4l1.5 1.3M14 4l-1.5 1.3"/>`,
+
+  'hbcu': `
+    <polygon points="12,3 22,8 12,13 2,8"/>
+    <polyline points="5,10 5,17 12,20 19,17 19,10"/>
+    <line x1="22" y1="8" x2="22" y2="15"/>
+    <polyline points="17,5 19,3 21,5"/>`,
+
+  'microphone': `
+    <rect x="9" y="2" width="6" height="11" rx="3"/>
+    <path d="M5 11a7 7 0 0 0 14 0"/>
+    <line x1="12" y1="18" x2="12" y2="22"/>
+    <line x1="8" y1="22" x2="16" y2="22"/>`,
+
+  'car-ride': `
+    <path d="M3 13l2-6h14l2 6"/>
+    <rect x="2" y="13" width="20" height="5" rx="1.5"/>
+    <circle cx="7" cy="18" r="2"/>
+    <circle cx="17" cy="18" r="2"/>
+    <path d="M8 7q2-1.5 4-1.5t4 1.5" stroke-width="1.2"/>`,
+
+  'graduation': `
+    <path d="M6 4h12v11a6 6 0 0 1-12 0V4z"/>
+    <line x1="6" y1="9" x2="18" y2="9"/>
+    <line x1="6" y1="4" x2="3" y2="4"/>
+    <line x1="18" y1="4" x2="21" y2="4"/>
+    <line x1="4.5" y1="4" x2="4.5" y2="11"/>`,
+
+  'conversation': `
+    <path d="M4 3h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H8l-4 4V4a1 1 0 0 1 1-1z"/>
+    <circle cx="12" cy="9" r="2.5"/>
+    <circle cx="12" cy="9" r="1" fill="currentColor" stroke="none"/>`,
+
+  'tiktok': `
+    <rect x="7" y="1" width="10" height="22" rx="2"/>
+    <circle cx="12" cy="15" r="3.5"/>
+    <circle cx="12" cy="15" r="1.5" fill="currentColor" stroke="none"/>
+    <line x1="10" y1="5" x2="14" y2="5"/>`,
+
+  'wrench': `
+    <path d="M14.7 6.3a5 5 0 1 0-8.4 8.4L14 22a2 2 0 0 0 2.8-2.8L12 13.4l5-5z"/>
+    <line x1="9" y1="9" x2="14" y2="7"/>`,
+
+  'burger': `
+    <path d="M5 9a7 3.5 0 0 1 14 0"/>
+    <rect x="3" y="9" width="18" height="3" rx="1"/>
+    <rect x="3" y="13" width="18" height="2.5" rx="0.5"/>
+    <path d="M5 17a7 3.5 0 0 0 14 0"/>
+    <polyline points="9,5 12,3 15,5"/>`,
+};
 
 /* ===== MAP INIT ===== */
 const map = L.map('map', {
@@ -283,7 +404,9 @@ const markerElements = {};
 const leafletMarkers = {};
 
 function createMarkerHtml(stop, isActive) {
-  return `<div class="trunk-marker${isActive ? ' is-active' : ''}" aria-label="Stop ${stop.id}: ${stop.city}">${stop.id}</div>`;
+  const inner = STOP_ICONS[stop.type] || STOP_ICONS['cd-sale'];
+  const svg = `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${inner}</svg>`;
+  return `<div class="trunk-marker${isActive ? ' is-active' : ''}" style="--stop-id:${stop.id}" aria-label="Stop ${stop.id}: ${stop.city}">${svg}</div>`;
 }
 
 stops.forEach(stop => {
@@ -372,11 +495,16 @@ function renderTweets(stopId, container) {
 /* ===== CITY GUIDE RENDER ===== */
 function renderGuide(stop) {
   const numStr = String(stop.id).padStart(2, '0');
+  const meta = stopMeta[stop.id] || {};
+  const inner = STOP_ICONS[stop.type] || STOP_ICONS['cd-sale'];
+  const badge = `<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${inner}</svg>`;
   return `
     <div class="guide-stop-num">Stop ${numStr} of ${stops.length}</div>
     <div class="guide-city-block">
+      <div class="guide-stop-icon">${badge}</div>
       <h2 class="guide-city-name">${stop.city}</h2>
       <p class="guide-state">${stop.state}</p>
+      ${meta.headline ? `<p class="guide-headline">${meta.headline}</p>` : ''}
     </div>
     <div class="guide-meta">
       <div class="meta-item">
@@ -393,6 +521,11 @@ function renderGuide(stop) {
       <p class="guide-section-label">The Story</p>
       <p class="guide-story-text">${stop.story}</p>
     </div>
+    ${meta.keyMoment ? `
+    <div class="guide-key-moment">
+      <p class="guide-key-moment-label">Key Moment</p>
+      <p class="guide-key-moment-text">${meta.keyMoment}</p>
+    </div>` : ''}
     <div class="guide-section">
       <p class="guide-section-label">Local Flavor</p>
       <ul class="guide-flavor-list">
