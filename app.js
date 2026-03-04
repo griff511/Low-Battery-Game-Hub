@@ -333,6 +333,42 @@ stops.forEach(stop => {
   stopItemsList.appendChild(li);
 });
 
+/* ===== TWEET HELPERS ===== */
+const TWEET_STORAGE_KEY = 'trunkSaleTweets';
+
+function getTweetsForStop(stopId) {
+  try {
+    const data = JSON.parse(localStorage.getItem(TWEET_STORAGE_KEY) || '{}');
+    return Array.isArray(data[stopId]) ? data[stopId] : [];
+  } catch { return []; }
+}
+
+function renderTweets(stopId, container) {
+  const urls = getTweetsForStop(stopId);
+  if (!urls.length) return;
+
+  const section = document.createElement('div');
+  section.className = 'tweets-section guide-section';
+  section.innerHTML = `
+    <p class="guide-section-label">From the Feed</p>
+    <div class="tweets-container">
+      ${urls.map(url => `<blockquote class="twitter-tweet" data-theme="dark" data-dnt="true"><a href="${url}"></a></blockquote>`).join('')}
+    </div>
+  `;
+  container.appendChild(section);
+
+  if (window.twttr && window.twttr.widgets) {
+    window.twttr.widgets.load(container);
+  } else {
+    // If widgets.js hasn't loaded yet, wait for it
+    window.addEventListener('load', () => {
+      if (window.twttr && window.twttr.widgets) {
+        window.twttr.widgets.load(container);
+      }
+    }, { once: true });
+  }
+}
+
 /* ===== CITY GUIDE RENDER ===== */
 function renderGuide(stop) {
   const numStr = String(stop.id).padStart(2, '0');
@@ -400,7 +436,9 @@ function selectStop(id) {
   map.flyTo([stop.lat, stop.lng], Math.max(map.getZoom(), 9), { duration: 0.8 });
 
   // Render guide
-  document.getElementById('guide-content').innerHTML = renderGuide(stop);
+  const guideContent = document.getElementById('guide-content');
+  guideContent.innerHTML = renderGuide(stop);
+  renderTweets(stop.id, guideContent);
 
   // Update nav
   const idx = stops.findIndex(s => s.id === id);
