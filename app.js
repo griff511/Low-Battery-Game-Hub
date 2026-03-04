@@ -616,6 +616,10 @@ document.addEventListener('keydown', e => {
   const stopsList  = document.getElementById('admin-stops-list');
 
   function openAdmin() {
+    // Bypass the landing screen so it doesn't sit on top of the admin panel
+    const landingEl = document.getElementById('landing');
+    if (landingEl) landingEl.style.display = 'none';
+
     overlay.classList.add('is-active');
     overlay.setAttribute('aria-hidden', 'false');
     if (sessionStorage.getItem('adminAuth') === '1') {

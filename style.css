@@ -558,7 +558,7 @@ ul { list-style: none; }
 .admin-overlay {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: 10000;
   background: var(--bg);
   display: flex;
   flex-direction: column;
