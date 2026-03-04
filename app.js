@@ -333,6 +333,42 @@ stops.forEach(stop => {
   stopItemsList.appendChild(li);
 });
 
+/* ===== TWEET HELPERS ===== */
+const TWEET_STORAGE_KEY = 'trunkSaleTweets';
+
+function getTweetsForStop(stopId) {
+  try {
+    const data = JSON.parse(localStorage.getItem(TWEET_STORAGE_KEY) || '{}');
+    return Array.isArray(data[stopId]) ? data[stopId] : [];
+  } catch { return []; }
+}
+
+function renderTweets(stopId, container) {
+  const urls = getTweetsForStop(stopId);
+  if (!urls.length) return;
+
+  const section = document.createElement('div');
+  section.className = 'tweets-section guide-section';
+  section.innerHTML = `
+    <p class="guide-section-label">From the Feed</p>
+    <div class="tweets-container">
+      ${urls.map(url => `<blockquote class="twitter-tweet" data-theme="dark" data-dnt="true"><a href="${url}"></a></blockquote>`).join('')}
+    </div>
+  `;
+  container.appendChild(section);
+
+  if (window.twttr && window.twttr.widgets) {
+    window.twttr.widgets.load(container);
+  } else {
+    // If widgets.js hasn't loaded yet, wait for it
+    window.addEventListener('load', () => {
+      if (window.twttr && window.twttr.widgets) {
+        window.twttr.widgets.load(container);
+      }
+    }, { once: true });
+  }
+}
+
 /* ===== CITY GUIDE RENDER ===== */
 function renderGuide(stop) {
   const numStr = String(stop.id).padStart(2, '0');
@@ -400,7 +436,9 @@ function selectStop(id) {
   map.flyTo([stop.lat, stop.lng], Math.max(map.getZoom(), 9), { duration: 0.8 });
 
   // Render guide
-  document.getElementById('guide-content').innerHTML = renderGuide(stop);
+  const guideContent = document.getElementById('guide-content');
+  guideContent.innerHTML = renderGuide(stop);
+  renderTweets(stop.id, guideContent);
 
   // Update nav
   const idx = stops.findIndex(s => s.id === id);
@@ -538,3 +576,210 @@ document.addEventListener('keydown', e => {
     }
   }
 });
+
+/* ===== ADMIN PANEL ===== */
+(function () {
+  const ADMIN_PASSWORD = 'lowbattery26';
+  const MAX_TWEETS = 3;
+
+  const adminHints = {
+    1:  'J. Cole trunk sale Raleigh The Fall-Off',
+    2:  'J. Cole NC A&T HBCU trunk sale',
+    3:  'J. Cole Charlotte trunk sale album',
+    4:  'J. Cole Atlanta trunk sale Dreamville',
+    5:  'J. Cole Hampton University trunk sale',
+    6:  'J. Cole 757 Norfolk trunk sale',
+    7:  'J. Cole Howard University trunk sale',
+    8:  'J. Cole Baltimore trunk sale',
+    9:  'J. Cole Philly trunk sale Fall-Off',
+    10: 'J. Cole NYC Manhattan trunk sale',
+    11: 'J. Cole St Johns Queens alma mater trunk sale',
+    12: 'J. Cole Nashville trunk sale The Fall-Off',
+    13: 'J. Cole Huntsville Alabama trunk sale',
+    14: 'J. Cole NOLA trunk sale The Fall-Off',
+    15: 'J. Cole Baton Rouge trunk sale',
+    16: 'J. Cole Houston H-Town trunk sale',
+    17: 'J. Cole Phoenix mechanic Old Dog music video',
+    18: 'J. Cole LA Leimert Park trunk sale',
+  };
+
+  const overlay    = document.getElementById('admin-overlay');
+  const gateScreen = document.getElementById('admin-gate');
+  const adminApp   = document.getElementById('admin-app');
+  const gateInput  = document.getElementById('admin-password');
+  const gateSubmit = document.getElementById('admin-gate-submit');
+  const gateError  = document.getElementById('admin-gate-error');
+  const backBtn    = document.getElementById('admin-back-btn');
+  const saveBtn    = document.getElementById('admin-save-btn');
+  const saveBtnFooter = document.getElementById('admin-save-btn-footer');
+  const saveToast  = document.getElementById('admin-save-toast');
+  const stopsList  = document.getElementById('admin-stops-list');
+
+  function openAdmin() {
+    // Bypass the landing screen so it doesn't sit on top of the admin panel
+    const landingEl = document.getElementById('landing');
+    if (landingEl) landingEl.style.display = 'none';
+
+    overlay.classList.add('is-active');
+    overlay.setAttribute('aria-hidden', 'false');
+    if (sessionStorage.getItem('adminAuth') === '1') {
+      showAdminApp();
+    } else {
+      gateScreen.style.display = '';
+      adminApp.style.display = 'none';
+      setTimeout(() => gateInput && gateInput.focus(), 80);
+    }
+  }
+
+  function closeAdmin() {
+    overlay.classList.remove('is-active');
+    overlay.setAttribute('aria-hidden', 'true');
+    if (location.hash === '#admin') {
+      history.pushState('', document.title, location.pathname + location.search);
+    }
+  }
+
+  function showAdminApp() {
+    gateScreen.style.display = 'none';
+    adminApp.style.display = 'flex';
+    buildStopCards();
+  }
+
+  function authenticate() {
+    if (gateInput.value === ADMIN_PASSWORD) {
+      sessionStorage.setItem('adminAuth', '1');
+      gateError.style.display = 'none';
+      gateInput.value = '';
+      showAdminApp();
+    } else {
+      gateError.style.display = 'block';
+      gateInput.value = '';
+      gateInput.focus();
+    }
+  }
+
+  /* ---- Stop Cards ---- */
+  function buildStopCards() {
+    const data = loadTweetData();
+    stopsList.innerHTML = '';
+    stops.forEach(stop => {
+      const savedUrls = (data[stop.id] || []).filter(Boolean);
+      const urls = savedUrls.length > 0 ? savedUrls : [''];
+      const card = document.createElement('div');
+      card.className = 'admin-stop-card';
+      card.dataset.stopId = stop.id;
+      card.innerHTML = `
+        <div class="admin-stop-header">
+          <div>
+            <div class="admin-stop-num">Stop ${String(stop.id).padStart(2, '0')}</div>
+            <div class="admin-stop-city">${stop.city}</div>
+            <div class="admin-stop-state">${stop.state}</div>
+          </div>
+          <button class="admin-btn-clear" data-stop-id="${stop.id}">Clear</button>
+        </div>
+        <div class="admin-search-hint">
+          <strong>Search hint:</strong> <code>${adminHints[stop.id] || ''}</code>
+        </div>
+        <div class="admin-tweet-inputs" data-stop-id="${stop.id}">
+          ${urls.map((url, i) => inputRowHTML(url, i, urls.length)).join('')}
+        </div>
+        <button class="admin-btn-add" data-stop-id="${stop.id}"${urls.length >= MAX_TWEETS ? ' disabled' : ''}>+ Add tweet URL</button>
+      `;
+      stopsList.appendChild(card);
+    });
+    bindCardEvents();
+  }
+
+  function inputRowHTML(url, _i, total) {
+    const safeUrl = url.replace(/"/g, '&quot;');
+    return `
+      <div class="admin-tweet-row">
+        <input type="url" class="admin-tweet-url" placeholder="https://x.com/username/status/..." value="${safeUrl}">
+        ${total > 1
+          ? `<button class="admin-btn-remove" title="Remove" aria-label="Remove URL">&times;</button>`
+          : `<span style="width:28px;flex-shrink:0"></span>`}
+      </div>`;
+  }
+
+  function bindCardEvents() {
+    stopsList.querySelectorAll('.admin-btn-clear').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.stopId;
+        const inputs = stopsList.querySelector(`.admin-tweet-inputs[data-stop-id="${id}"]`);
+        inputs.innerHTML = inputRowHTML('', 0, 1);
+        const addBtn = stopsList.querySelector(`.admin-btn-add[data-stop-id="${id}"]`);
+        if (addBtn) addBtn.disabled = false;
+      });
+    });
+
+    stopsList.querySelectorAll('.admin-btn-add').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.stopId;
+        const inputs = stopsList.querySelector(`.admin-tweet-inputs[data-stop-id="${id}"]`);
+        const urls = Array.from(inputs.querySelectorAll('.admin-tweet-url')).map(i => i.value);
+        if (urls.length >= MAX_TWEETS) return;
+        urls.push('');
+        inputs.innerHTML = urls.map((url, i) => inputRowHTML(url, i, urls.length)).join('');
+        bindRemoveEvents(inputs, btn);
+        btn.disabled = inputs.querySelectorAll('.admin-tweet-row').length >= MAX_TWEETS;
+        const all = inputs.querySelectorAll('.admin-tweet-url');
+        all[all.length - 1].focus();
+      });
+    });
+
+    stopsList.querySelectorAll('.admin-tweet-inputs').forEach(inputs => {
+      const id = inputs.dataset.stopId;
+      const addBtn = stopsList.querySelector(`.admin-btn-add[data-stop-id="${id}"]`);
+      bindRemoveEvents(inputs, addBtn);
+    });
+  }
+
+  function bindRemoveEvents(inputs, addBtn) {
+    inputs.querySelectorAll('.admin-btn-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const row = btn.closest('.admin-tweet-row');
+        const urls = Array.from(inputs.querySelectorAll('.admin-tweet-url')).map(i => i.value);
+        const idx = Array.from(inputs.querySelectorAll('.admin-tweet-row')).indexOf(row);
+        urls.splice(idx, 1);
+        if (urls.length === 0) urls.push('');
+        inputs.innerHTML = urls.map((url, i) => inputRowHTML(url, i, urls.length)).join('');
+        bindRemoveEvents(inputs, addBtn);
+        if (addBtn) addBtn.disabled = urls.length >= MAX_TWEETS;
+      });
+    });
+  }
+
+  /* ---- Save ---- */
+  function saveAll() {
+    const data = {};
+    stopsList.querySelectorAll('.admin-stop-card').forEach(card => {
+      const id = Number(card.dataset.stopId);
+      const urls = Array.from(card.querySelectorAll('.admin-tweet-url'))
+        .map(input => input.value.trim())
+        .filter(url => url && (url.includes('twitter.com') || url.includes('x.com')));
+      if (urls.length) data[id] = urls;
+    });
+    localStorage.setItem(TWEET_STORAGE_KEY, JSON.stringify(data));
+    saveToast.classList.add('show');
+    setTimeout(() => saveToast.classList.remove('show'), 2000);
+  }
+
+  /* ---- Hash routing ---- */
+  function handleHash() {
+    if (location.hash === '#admin') {
+      openAdmin();
+    } else if (overlay.classList.contains('is-active')) {
+      closeAdmin();
+    }
+  }
+
+  window.addEventListener('hashchange', handleHash);
+  handleHash(); // handle if page loads with #admin already in URL
+
+  /* ---- Bind buttons ---- */
+  gateSubmit.addEventListener('click', authenticate);
+  gateInput.addEventListener('keydown', e => { if (e.key === 'Enter') authenticate(); });
+  backBtn.addEventListener('click', closeAdmin);
+  saveBtn.addEventListener('click', saveAll);
+  saveBtnFooter.addEventListener('click', saveAll);
+}());
